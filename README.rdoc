@@ -1,3 +1,8 @@
+== Beschreibung
+Es soll eine Webseite zum Verkauf von Konzert-Tickets gebaut werden. Die Bezahlung der Tickets soll nicht über die App realisiert werden.  
+  
+Dabei sollen Veranstaltungen, deren Standorte und etwaige Bestellungen gemanaged werden.  
+  
 == README
 
 This README would normally document whatever steps are necessary to get the
