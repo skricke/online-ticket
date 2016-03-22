@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  resources :venue, :event, :order
+  resources :venue do
+    resources :event do
+      resources :order
+    end
+  end
+
+  resources :event
+  resources :order
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -3,42 +3,37 @@
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Positionsanzeige -->
   <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
+    <% @events.each do |event| %>
+      <li data-target="#myCarousel" data-slide-to="<%= event.__id__%>" ></li> <!-- class="%= 'active' if current_page?(event_index_path) %>" -->
+    <% end %>
   </ol>
-  <div class="carousel-inner" role="listbox">
-    <div class="item active">
-      <img class="first-slide" src="http://lorempixel.com/600/200/nightlife" alt="Erste Folie">
-      <div class="container">
-        <div class="carousel-caption">
-          <h1>Beispiel-Überschrift.</h1>
-          <p>Hinweis: Falls du diese Seite über eine <code>file://</code>-URL anzeigst, werden die Glyphicon-Buttons für das nächste und vorherige Objekt links und rechts unter Umständen aufgrund von Browser-Sicherheitsregeln nicht vernünftig geladen/angezeigt.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Melde dich noch heute an</a></p>
+
+  <% @events.each do |event| %>
+     <!-- <tr>
+        <td><%= event.title %></td>
+        <td><%= event.description %></td>
+        <td><%= link_to 'Show', event_path(event) %></td>
+        <td><%= link_to 'Edit', edit_event_path(event) %></td>
+        <td><%= link_to 'Destroy', event_path(event),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' } %></td>
+      </tr>-->
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <img class="first-slide" src="http://lorempixel.com/600/200/nightlife" alt="Event">
+          <div class="container">
+            <div class="carousel-caption">
+              <%= render event %>
+              <p><a class="btn btn-lg btn-primary" href="order/new" role="button">Ticket kaufen</a></p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="item">
-      <img class="second-slide" src="http://lorempixel.com/400/200/nightlife" alt="Zweite Folie">
-      <div class="container">
-        <div class="carousel-caption">
-          <h1>Noch eine Beispiel-Überschrift.</h1>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Mehr erfahren</a></p>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <img class="third-slide" src="http://lorempixel.com/150/150/nightlife" alt="Dritte Folie">
-      <div class="container">
-        <div class="carousel-caption">
-          <h1>Aller guten Dinge sind drei.</h1>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Galerie erkunden</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <% end %>
+
+
+
+
   <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     <span class="sr-only">Zurück</span>
@@ -54,5 +49,4 @@
   <%= render 'layouts/presentation_column' %>
   <!-- presentationheader
   -->
-
 </div><!-- /.container -->

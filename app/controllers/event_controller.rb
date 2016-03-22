@@ -1,9 +1,12 @@
 class EventController < ApplicationController
   def index
+    @venues = Venue.all
+    @events = @venues.event.all
   end
 
   def show
-    @event = Event.find(params[:id])
+    @venue = Venue.find(params[:venue_id])
+    @event = @venue.event.find(params[:id])
   end
 
   def new
@@ -11,11 +14,13 @@ class EventController < ApplicationController
   end
 
   def edit
-    @event = Event.find(params[:id])
+    @venue = Venue.find(params[:venue_id])
+    @event = @venue.event.find(params[:id])
   end
 
   def create
-    @event = Event.new(event_params)
+    @venue = Venue.find(params[:venue => [:venue_id]])
+    @event = @venue.event.create(event_params)
     if @event.save
       redirect_to @event
     else
@@ -31,6 +36,6 @@ class EventController < ApplicationController
 
   private
   def event_params
-    params.require(:event).permit(:title, :description, :price)
+    params.require(:event).permit(:title, :description, :price, {:venue => [:venue_id]})
   end
 end

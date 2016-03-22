@@ -20,7 +20,7 @@ class VenueController < ApplicationController
     if @venue.save
       redirect_to @venue
     else
-      render :edit
+      render :new
     end
   end
 

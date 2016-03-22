@@ -1,22 +1,32 @@
 class OrderController < ApplicationController
   def index
-
+    @venue = Venue.find(params[:venue_id])
+    @event = @venue.event.find(params[:event_id])
+    @orders = @event.order.all
   end
 
   def show
-    @order = Order.find(params[:id])
+    @venue = Venue.find(params[:venue_id])
+    @event = @venue.event.find(params[:event_id])
+    @order = @event.order.find(params[:id])
   end
 
   def new
-    @order = Order.new
+    @venue = Venue.find(params[:venue_id])
+    @event = @venue.event.find(params[:event_id])
+    @order = @event.order.new
   end
 
   def edit
-    @order = Order.find(params[:id])
+    @venue = Venue.find(params[:venue_id])
+    @event = @venue.event.find(params[:event_id])
+    @order = @event.order.find(params[:id])
   end
 
   def create
-    @order = Order.new(order_params)
+    @venue = Venue.find(params[:venue_id])
+    @event = @venue.event.find(params[:event_id])
+    @order = @event.order.new(order_params)
     if @order.save
       redirect_to @order
     else
