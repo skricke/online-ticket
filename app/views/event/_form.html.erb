@@ -1,48 +1,53 @@
-<div class="jumbotron">
-  <%= simple_form_for ([@venue, @venue.events.build]), url: {action: 'create'} do |f| %>
+<div class="col-md-4"></div>
+<div class="col-md-4">
+  <%= simple_form_for @event, url: {action: 'create'} do |f| %>
 
     <% if @event.errors.any? %>
-        <div id="error_explanation">
-          <h2>
-            <%= pluralize(event.errors.count, "") %> Fehler verhindern, dass die Veranstaltung angelegt werden kann.
-          </h2>
-          <ul>
-            <% @event.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
+        <div id="error_explanation" class="alert alert-danger" role="alert">
+          <h4>
+            <%= pluralize(@event.errors.count, "") %> Fehler verhindern, dass die Veranstaltung angelegt werden kann.
+          </h4>
+
         </div>
     <% end %>
 
     <p>
-      <%= f.label :titel %><br>
-      <%= f.text_field :title %>
+      <%= f.input :title,
+                  label: 'Titel',
+                  hint: 'Der Titel der Veranstaltung.' %>
     </p>
 
     <p>
-      <%= f.label :beschreibung %><br>
-      <%= f.text_area :description %>
+      <%= f.input :description,
+                  as: :text,
+                  label: 'Beschreibung',
+                  hint: 'Hier kann eine detaillierte Beschreibung der Veranstaltung gegeben werden. ' %>
     </p>
 
     <p>
-      <%= f.label :ticket_Preis %><br>
-      <%= f.text_field :price %>
+      <%= f.input :price,
+                  as: :decimal,
+                  label: 'Ticket-Preis in €' %>
     </p>
 
     <p>
-      <%= f.label 'Veranstaltungsort' %>
-        <!-- collection_select(object, method, collection, value_method, text_method, options = {}, html_options = {}) -->
-        <%= f.collection_select(:venue, Venue.all, :id, :title, { :prompt => 'Wähle Veranstaltungsort' })
-            #f.association :venue, collection: @venues
-                          #:collection => Venue.order(:title), :prompt => 'Wähle Veranstaltungsort'
-                          #:as => collection_select(:venue, Venue.all, :id, :title, { :prompt => 'Wähle Veranstaltungsort' })
-        %>
+      <!--<#%= f.label 'Veranstaltungsort' %> -->
+      <!-- collection_select(object, method, collection, value_method, text_method, options = {}, html_options = {}) -->
+      <%= #f.collection_select(:venue, Venue.all, :id, :title, { :prompt => 'Wähle Veranstaltungsort' })
+          f.association :venue,
+                        :collection => Venue.order(:title),
+                        :prompt => 'Wähle Veranstaltungsort',
+                        :label => false,
+                        :input_html => {:class => 'input-small'}
+                        #:as => :collection_select, collection: Venue.all, :input_html => {:class => 'input-small'} #(:venue, Venue.all, :venue_id, :title, { :prompt => 'Wähle Veranstaltungsort' })
+      %>
 
 
     </p>
 
     <p>
-      <%= f.submit 'Event anlegen'%>
+      <%= f.submit 'Event anlegen', id: 'submit_event', class: 'btn btn-default', data: {disable_with: 'Bitte warten...'}%>
     </p>
   <% end %>
 </div>
+<div class="col-md-4"></div>

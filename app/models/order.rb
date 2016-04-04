@@ -9,8 +9,11 @@ class Order < ActiveRecord::Base
             presence: true,
             numericality: { greater_than: 0,
                             message: "Die Menge muss mind. 1 sein."}
-  validates :event_id, presence: {
-      message: "Die Bestellung muss zu einer Veranstaltung gehören."}
-  #accepts_nested_attributes_for :event, :reject_if => :all_blank
+  validates :event_id,
+            presence: {
+                message: "Die Bestellung muss zu einer Veranstaltung gehören."}
+
   belongs_to :event
+  accepts_nested_attributes_for :event, :reject_if => :all_blank
+
 end

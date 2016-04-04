@@ -1,37 +1,37 @@
-<div class="jumbotron">
-  <%= form_for @venue, url: {action: 'create'} do |f| %>
+<div class="col-md-4"></div>
+<div class="col-md-4">
+  <%= simple_form_for @venue, url: {action: 'create'} do |f| %>
 
     <% if @venue.errors.any? %>
-        <div id="error_explanation">
-          <h2>
-            <%= pluralize(@venue.errors.count,  "") %>Fehler verhindern, dass der Veranstaltungsort angelegt werden kann.
-          </h2>
-          <ul>
-            <% @venue.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
+        <div id="error_explanation" class="alert alert-danger" role="alert">
+          <h4>
+            <%= pluralize(@venue.errors.count,  "") %> Fehler verhindern, dass der Veranstaltungsort angelegt werden kann.
+          </h4>
         </div>
     <% end %>
 
     <p>
-      <%= f.label :name %><br>
-      <%= f.text_field :title %>
+      <%= f.input :title,
+                  label: 'Name des Veranstaltungsorts' %>
     </p>
 
     <p>
-      <%= f.label :beschreibung %><br>
-      <%= f.text_area :description %>
+      <%= f.input :description,
+                  as: :text,
+                  label: 'Beschreibung',
+                  hint: 'Hier kann eine detaillierte Beschreibung des Veranstaltungsortes gegeben werden. (max. 500 Zeichen)' %>
     </p>
 
     <p>
-      <%= f.label :verfügbare_Plätze %><br>
-      <%= f.text_field :available_seats %>
+      <%= f.input :available_seats,
+                  as: :integer,
+                  label: 'Verfügbare Plätze' %>
     </p>
 
     <p>
-      <%= f.submit 'Veranstaltungsort anlegen' %>
+      <%= f.submit 'Veranstaltungsort anlegen', id: 'submit_venue', class: 'button', data: {disable_with: 'Bitte warten...'} %>
     </p>
 
   <% end %>
 </div>
+<div class="col-md-4"></div>

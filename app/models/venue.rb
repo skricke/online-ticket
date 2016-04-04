@@ -3,8 +3,8 @@ class Venue < ActiveRecord::Base
             presence: {
                 message: "Der Veranstaltungsort muss einen Titel haben."}
   validates :description,
-            length: { maximum: 300,
-                      too_long: "Die Beschreibung darf maximal 300 Zeichen haben."}
+            length: { maximum: 500,
+                      too_long: "Die Beschreibung darf maximal 500 Zeichen haben."}
   validates :available_seats,
             presence: {
                 message: "Der Veranstaltungsort muss verfügbare Plätze haben."},

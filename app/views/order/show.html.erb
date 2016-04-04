@@ -1,3 +1,16 @@
-<p>Vorname: <%= @order.name %> Nachname: <%= @order.surname %></p>
-<p></p>
-<p>Anzahl Tickets: <%= @order.amount %></p>
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <h3>Vielen Dank für Ihre Bestellung!</h3>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <p>Vorname: <%= @order.name %> </p>
+    <p>Nachname: <%= @order.surname %></p>
+    <p>Anzahl Tickets: <%= @order.amount %></p>
+  </div>
+  <div class="col-md-4"></div>
+</div>

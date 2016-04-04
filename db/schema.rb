@@ -11,26 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160330115811) do
+ActiveRecord::Schema.define(version: 20160330115559) do
 
-  create_table "bestellungens", force: :cascade do |t|
-    t.string   "name"
-    t.string   "surname"
-    t.integer  "amount"
-    t.integer  "event_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "bestellungens", ["event_id"], name: "index_bestellungens_on_event_id"
-
-  create_table "event", force: :cascade do |t|
+  create_table "events", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.decimal  "price"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.decimal  "price",       precision: 5, scale: 2
+    t.integer  "venue_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
+
+  add_index "events", ["venue_id"], name: "index_events_on_venue_id"
 
   create_table "orders", force: :cascade do |t|
     t.string   "name"
@@ -44,25 +36,6 @@ ActiveRecord::Schema.define(version: 20160330115811) do
   add_index "orders", ["event_id"], name: "index_orders_on_event_id"
 
   create_table "venues", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.integer  "available_seats"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  create_table "veranstaltungens", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.decimal  "price",       precision: 5, scale: 2
-    t.integer  "Venue_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-  end
-
-  add_index "veranstaltungens", ["Venue_id"], name: "index_veranstaltungens_on_Venue_id"
-
-  create_table "veranstaltungsortes", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
     t.integer  "available_seats"

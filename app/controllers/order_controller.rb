@@ -1,36 +1,28 @@
 class OrderController < ApplicationController
   def index
-    @venue = Venue.find(params[:venue_id])
-    event = @venue.event.find(params[:event_id])
-    @orders = event.order.all
+    @orders = Order.all
   end
 
   def show
-    @venue = Venue.find(params[:venue_id])
-    event = @venue.event.find(params[:event_id])
-    @order = event.order.find(params[:id])
+    @order = Order.find(params[:id])
   end
 
   def new
-    @venue = Venue.find(params[:venue_id])
-    event = @venue.event.find(params[:event_id])
-    @order = event.order.new
+    @event = Event.find(params[:event_id])
+    #@order = Order.new
   end
 
   def edit
-    @venue = Venue.find(params[:venue_id])
-    event = @venue.event.find(params[:event_id])
-    @order = event.order.find(params[:id])
+
   end
 
-  def create
-    @venue = Venue.find(params[:venue_id])
-    event = @venue.event.find(params[:event_id])
-    @order = event.order.new(order_params)
+  def creates
+    @event = Event.find(params[:order][:event_id])
+    @order = @event.orders.build(order_params)
     if @order.save
       redirect_to @order
     else
-      render :edit
+      render :new
     end
   end
 
@@ -42,6 +34,6 @@ class OrderController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:name, :surname, :amount)
+    params.require(:order).permit(:name, :surname, :amount, :event_id)
   end
 end

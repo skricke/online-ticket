@@ -1,3 +1,14 @@
-<h1>Veranstaltung: <%= old_event.title %></h1>
-<p>Beschreibung: <%= old_event.description %></p>
-<p>Preis / Ticket: <%= old_event.price %></p>
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <h1><%= @event.title %></h1>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+<div class="jumbotron">
+  <div class="row">
+    <h3>Daten zur Veranstaltung:: </h3>
+    <p>Beschreibung: <%= @event.description %></p>
+    <p>Preis / Ticket: <%= @event.price %></p>
+  </div>
+</div>

@@ -10,8 +10,9 @@ class Event < ActiveRecord::Base
                 message: "Die Veranstaltung muss einen Preis haben."},
             numericality: { greater_than: 0,
                             message: "Es muss ein Preis größer 0 festgelegt sein."}
-  #validates :venue_id, presence: {
-  #              message: "Die Veranstaltung muss einen Veranstaltungsort haben."}
+  validates :venue_id,
+            presence: {
+                message: "Die Veranstaltung muss einen Veranstaltungsort haben."}
 
   belongs_to :venue
   accepts_nested_attributes_for :venue, :reject_if => :all_blank

@@ -1,3 +1,24 @@
-<h1>Veranstaltungsort: <%= @venue.title %></h1>
-<p>Beschreibung: <%= @venue.description %></p>
-<p>Verfügbare Plätze: <%= @venue.available_seats %></p>
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <h1><%= @venue.title %></h1>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+<div class="jumbotron">
+  <div class="row">
+    <h3>Daten zum Veranstaltungsort: </h3>
+    <p>Beschreibung: <%= @venue.description %></p>
+    <p>Verfügbare Plätze: <%= @venue.available_seats %></p>
+    <p>Anzahl Veranstaltungen am Ort: <%= @venue.events.length%></p>
+  </div>
+  <div class="row">
+    <%= form_tag event_path, method: 'get'  do %>
+      <%= select_tag :event_id, options_for_select(@venue.events { |e| [e.title, e.id]}) %>
+        <!--%= collection_select(:event, @venue.events, :id, :title, { :prompt => 'Wähle Veranstaltungsort' }) %>
+      <%= submit_tag 'Event Details', class: 'btn btn-xs btn-default' %>
+
+      <!-- collection_select(object, method, collection, value_method, text_method, options = {}, html_options = {}) -->
+    <% end %>
+  </div>
+</div>

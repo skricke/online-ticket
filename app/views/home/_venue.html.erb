@@ -1,0 +1,10 @@
+ <div class="row">
+  <% @venues.each do |venue| %>
+    <div class="col-lg-4 text-center">
+      <img class="img-circle" src="/assets/location_pin.jpg" alt="Generisches Platzhalter-Bild" width="140" height="140">
+      <h2><%= venue.title %></h2>
+      <p><%= link_to 'View details', venue_path(venue.id), class: "btn btn-info btn-xs " %></a></p>
+      <p> <%= venue.description %></p>
+    </div>
+  <% end %>
+ </div>
