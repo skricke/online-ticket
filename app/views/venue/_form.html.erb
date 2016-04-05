@@ -1,6 +1,6 @@
 <div class="col-md-4"></div>
 <div class="col-md-4">
-  <%= simple_form_for @venue, url: {action: 'create'} do |f| %>
+  <%= simple_form_for @venue, html: { class: 'form-horizontal' } do |f| %>
 
     <% if @venue.errors.any? %>
         <div id="error_explanation" class="alert alert-danger" role="alert">
@@ -29,7 +29,7 @@
     </p>
 
     <p>
-      <%= f.submit 'Veranstaltungsort anlegen', id: 'submit_venue', class: 'button', data: {disable_with: 'Bitte warten...'} %>
+      <%= f.submit 'Veranstaltungsort speichern', id: 'submit_venue', class: 'button', data: {disable_with: 'Bitte warten...'} %>
     </p>
 
   <% end %>

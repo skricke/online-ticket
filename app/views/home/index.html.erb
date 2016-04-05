@@ -15,11 +15,20 @@
         <img class="first-slide" src="http://lorempixel.com/600/200/nightlife" alt="Event">
         <div class="container">
           <div class="carousel-caption">
-
-                <h1><%= event.title %></h1>
-                <p> <%= event.description %></p>
+            <h1><%= event.title %></h1>
+            <p> <%= event.description %></p>
             <div class="slide-footer">
-              <p><%= link_to 'Ticket kaufen', new_order_path(event_id: event.id), class: "btn btn-lg btn-primary", data: {disable_with: 'Bitte warten...'} %></a></p>
+              <%
+                tickets = 0
+                event.orders.each do |t|
+                  tickets += t.amount
+                end
+                seats = event.venue.available_seats
+                available_tickets = seats - tickets
+              %>
+              <% if available_tickets > 0 %>
+                <p><%= link_to 'Ticket kaufen', new_order_path(event_id: event.id), class: "btn btn-lg btn-primary", data: {disable_with: 'Bitte warten...'} %></a></p>
+              <% end %>
             </div>
           </div>
         </div>

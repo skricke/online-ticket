@@ -1,11 +1,11 @@
 <div class="col-md-4"></div>
 <div class="col-md-4">
-  <%= simple_form_for ([@event, @event.orders.build]) , url: {action: 'create'} do |f| %>
+  <%= simple_form_for ([@event, @event.orders.build]), html: { class: 'form-horizontal' }, url: {action: 'create'} do |f| %>
 
     <% if @event.errors.any? %>
         <div id="error_explanation" class="alert alert-danger" role="alert">
           <h4>
-            <%= pluralize(@event.errors.count, "") %> Fehler verhindern, dass die Veranstaltung angelegt werden kann.
+            Fehler verhindern eine Bestellung.
           </h4>
         </div>
     <% end %>
@@ -23,18 +23,24 @@
     </p>
 
     <p>
-      <%= f.input :amount,
+      <%= number_of_tickets = f.input :amount,
                   as: :integer,
                   input_html: {value: '1'},
                   label: 'Anzahl der Tickets',
                   hint: 'Wieviele Tickets möchten sie bestellen?'%>
-    </p>
       <%= f.association :event,
-                        as: :hidden %>
-      <p>Gesamtpreis: <%= :amount * @event.price %> €</p>
-    <p>
-      <%= f.submit 'Jetzt kaufen', id: 'submit_order', class: 'btn btn-lg btn-primary', data: {disable_with: 'Bitte warten...'}%>
+                        as: :hidden
+      %>
     </p>
+    <%
+
+    %>
+    <p>Noch <%= @available_tickets %> Tickets verfügbar.</p>
+      <p>
+        <% if @available_tickets > 0 %>
+          <%= f.submit 'Jetzt kaufen', id: 'submit_order', class: 'btn btn-lg btn-primary', data: {disable_with: 'Bitte warten...', confirm: 'Sicher?'}%>
+        <% end %>
+      </p>
   <% end %>
 </div>
 <div class="col-md-4"></div>

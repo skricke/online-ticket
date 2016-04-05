@@ -3,5 +3,6 @@ class HomeController < ApplicationController
 		@venues = Venue.all
 		@events = Event.all
 		@orders = Order.all
+
 	end
 end

@@ -4,8 +4,6 @@ class EventController < ApplicationController
   end
 
   def show
-    #@venue = Venue.find(params[:venue_id])
-    #@event = @venue.event.find(params[:id])
     @event = Event.find(params[:id])
   end
 
@@ -17,7 +15,7 @@ class EventController < ApplicationController
 
   def edit
     #@venue = Venue.find(params[:venue_id])
-    #@event = @venue.event.find(params[:id])
+    @event = Event.find(params[:id])
   end
 
   def create
@@ -39,9 +37,18 @@ class EventController < ApplicationController
   end
 
   def update
+    @event = Event.find(params[:id])
+    if @event.update(event_params)
+      redirect_to @event
+    else
+      render :edit
+    end
   end
 
   def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+    redirect_to root_path
   end
 
   private

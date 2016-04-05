@@ -1,16 +1,25 @@
 <div class="row">
-  <div class="col-md-4"></div>
-  <div class="col-md-4">
-    <h3>Vielen Dank für Ihre Bestellung!</h3>
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <h3>Vielen Dank für Ihre Bestellung!
+      <%= link_to 'Bestellung löschen', order_path(@order.id), method: :delete, class: "btn btn-danger btn-xs pull-right" %>
+    </h3>
   </div>
-  <div class="col-md-4"></div>
+  <div class="col-md-2"></div>
 </div>
 <div class="row">
-  <div class="col-md-4"></div>
+  <div class="col-md-2"></div>
   <div class="col-md-4">
     <p>Vorname: <%= @order.name %> </p>
     <p>Nachname: <%= @order.surname %></p>
     <p>Anzahl Tickets: <%= @order.amount %></p>
+    <% gesamt = @order.amount * @order.event.price %>
+    <p>Gesamtpreis: <%= gesamt %> €</p>
   </div>
-  <div class="col-md-4"></div>
+  <div class="col-md-6">
+    <div class="row">
+      <p><%= link_to "#{@order.event.title}", event_path(@order.event.id)%>
+        im <%= link_to "#{@order.event.venue.title}", venue_path(@order.event.venue.id)%></p>
+    </div>
+  </div>
 </div>

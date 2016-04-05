@@ -3,12 +3,38 @@
   <div class="col-md-4">
     <h1><%= @event.title %></h1>
   </div>
-  <div class="col-md-4"></div>
+  <div class="col-md-4 text-right"><%= link_to 'edit', edit_event_path(@event.id), class: "btn btn-warning btn-xs" %></div>
 </div>
 <div class="jumbotron">
   <div class="row">
-    <h3>Daten zur Veranstaltung:: </h3>
-    <p>Beschreibung: <%= @event.description %></p>
-    <p>Preis / Ticket: <%= @event.price %></p>
+    <div class="col-md-4">
+      <h3>Daten zur Veranstaltung: </h3>
+      <p class="text-info">Die Veranstaltung findet im <%= link_to "#{@event.venue.title}", venue_path(@event.venue.id)%> statt.</p>
+      <p class="text-primary">Beschreibung: </p>
+      <p><%= @event.description %></p>
+      <p>Preis / Ticket: <%= "%.2f" % @event.price %> €</p>
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <%
+        tickets = 0
+        @event.orders.each do |t|
+          tickets += t.amount
+        end
+        umsatz = tickets * @event.price
+        seats = @event.venue.available_seats
+        available_tickets = seats - tickets
+      %>
+      <h3>Details</h3>
+      <p>Tickets verfügbar: <%= "#{available_tickets} / #{seats}"%></p>
+      <p>Generierter Umsatz des Events: <%= "%.2f" % umsatz %> €</p>
+      <p>(<%= tickets %> Tickets wurden bisher gekauft.)</p>
+    </div>
+  </div>
+  <% if available_tickets > 0 %>
+      <p><%= link_to 'Ticket kaufen', new_order_path(event_id: @event.id), class: "btn btn-lg btn-primary", data: {disable_with: 'Bitte warten...'} %></a></p>
+  <% end %>
+      <div class="row">
+    <%= link_to 'Event löschen', event_path(@event.id), method: :delete, class: "btn btn-danger btn-xs pull-right" %>
   </div>
 </div>

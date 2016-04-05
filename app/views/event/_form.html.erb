@@ -1,6 +1,6 @@
 <div class="col-md-4"></div>
 <div class="col-md-4">
-  <%= simple_form_for @event, url: {action: 'create'} do |f| %>
+  <%= simple_form_for @event do |f| %>
 
     <% if @event.errors.any? %>
         <div id="error_explanation" class="alert alert-danger" role="alert">
@@ -46,7 +46,7 @@
     </p>
 
     <p>
-      <%= f.submit 'Event anlegen', id: 'submit_event', class: 'btn btn-default', data: {disable_with: 'Bitte warten...'}%>
+      <%= f.submit 'Event speichern', id: 'submit_event', class: 'btn btn-default', data: {disable_with: 'Bitte warten...'}%>
     </p>
   <% end %>
 </div>
